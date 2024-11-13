@@ -18,11 +18,11 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
 
 void buttonPressRelease(int button_id, int state) {
   if (state == HIGH) {
-    Joystick.pressButton(button_id);
+    Joystick.releaseButton(button_id);
     digitalWrite(LED_PIN, LOW);
   }
   else {
-    Joystick.releaseButton(button_id);
+    Joystick.pressButton(button_id);
     digitalWrite(LED_PIN, HIGH);
   }
 }
@@ -32,14 +32,12 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
 
   // Range
-  pinMode(RANGE_PIN, INPUT);
-  digitalWrite(RANGE_PIN, HIGH);
+  pinMode(RANGE_PIN, INPUT_PULLUP);
   rangeState = digitalRead(RANGE_PIN);
   buttonPressRelease(RANGE_BTN_IDX, rangeState);
 
   // Split
-  pinMode(SPLIT_PIN, INPUT);
-  digitalWrite(SPLIT_PIN, HIGH);
+  pinMode(SPLIT_PIN, INPUT_PULLUP);
   splitState = digitalRead(SPLIT_PIN);
   buttonPressRelease(SPLIT_BTN_IDX, splitState);
 }
